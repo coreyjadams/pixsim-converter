@@ -117,8 +117,6 @@ def convert_file(input_anatree_file_name):
     dune_meta_2D = [ get_dune_meta2D(i) for i in [0, 1, 2]]
 
     for i_event in range(len(events)):
-        if i_event > 1:
-            continue
         print("Converting entry ", i_event)
         event = events[i_event]
         run    = event['run']
@@ -279,7 +277,7 @@ def convert_file(input_anatree_file_name):
             coords_2d[1] = ides_x[i]
 
             index = dune_meta_2D[0].position_to_index(coords_2d)
-            if index > dune_meta_2D[0].total_voxels() or True:
+            if index > dune_meta_2D[0].total_voxels():
                 print("0: index ", index)
                 print("   coords_2d[0]:", coords_2d[0])
                 print("   coords_2d[1]:", coords_2d[1])
@@ -288,27 +286,27 @@ def convert_file(input_anatree_file_name):
                 print("   ides_z[i]:",    ides_z[i])
                 print("   coord x: ", dune_meta_2D[0].position_to_coordinate(coords_2d[0], 0))
                 print("   coord y: ", dune_meta_2D[0].position_to_coordinate(coords_2d[1], 1))
-                # continue
+                continue
 
             cluster_vec_2d[0][cluster_index].emplace(index, value, True)
 
             coords_2d[0] = cos_theta*ides_z[i] - sin_theta*ides_y[i]
             coords_2d[1] = ides_x[i]
             index = dune_meta_2D[1].position_to_index(coords_2d)
-            if index > dune_meta_2D[1].total_voxels()  or True:
+            if index > dune_meta_2D[1].total_voxels():
                 print("1: ", index)
                 print("  ", coords_2d[0])
                 print("  ", coords_2d[1])
                 print("--", ides_y[i])
                 print("--", ides_z[i])
-                # continue
+                continue
 
             cluster_vec_2d[1][cluster_index].emplace(index, value, True)
 
             coords_2d[0] = ides_z[i]
             coords_2d[1] = ides_x[i]
             index = dune_meta_2D[2].position_to_index(coords_2d)
-            if index > dune_meta_2D[2].total_voxels()  or True:
+            if index > dune_meta_2D[2].total_voxels():
                 print("2: index ", index)
                 print("   coords_2d[0]:", coords_2d[0])
                 print("   coords_2d[1]:", coords_2d[1])
@@ -317,10 +315,7 @@ def convert_file(input_anatree_file_name):
                 print("   ides_z[i]:",    ides_z[i])
                 print("   coord x: ", dune_meta_2D[2].position_to_coordinate(coords_2d[0], 0))
                 print("   coord y: ", dune_meta_2D[2].position_to_coordinate(coords_2d[1], 1))
-
-
-
-                # continue
+                continue
             cluster_vec_2d[2][cluster_index].emplace(index, value, True)
             # if i > 10:
                 # break
